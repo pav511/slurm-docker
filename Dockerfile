@@ -1,6 +1,7 @@
 FROM centos:7
 
-ARG SLURM_TAG=slurm-19-05-5-1
+ARG SLURM_TAG=qos-alpha
+ARG REPO=pav511
 
 ARG MUNGEUSER=891
 ARG SLURMUSER=16924
@@ -58,7 +59,7 @@ COPY sssd/sssd.conf /etc/sssd/sssd.conf
 
 # Compile, build and install Slurm from Git source
 RUN set -ex \
-    && git clone https://github.com/SchedMD/slurm.git \
+    && git clone https://github.com/$REPO/slurm.git \
     && pushd slurm \
     && git checkout tags/$SLURM_TAG \
     && ./configure --enable-debug --prefix=/usr \
